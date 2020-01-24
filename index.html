@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-lg-8 col-xl-6">
+
+          <h2 class="mb-3">Todo List with Vue.js</h2>
+
+          <div class="row">
+            <div class="col-sm-6 col-md-7">
+              <form @submit.prevent>
+                <div class="form-group">
+                  <input class="form-control" v-model="search" type="text" placeholder="Search">
+                </div>
+              </form>
+            </div>
+            <div class="col-sm-6 col-md-5 text-center text-sm-right">
+              <div class="btn-group mb-3">
+                <button type="button" @click="filterList('all')" class="btn btn-primary">All</button>
+                <button type="button" @click="filterList('important')" class="btn btn-info">Important</button>
+                <button type="button" @click="filterList('done')" class="btn btn-success">Done</button>
+              </div>
+            </div>
+          </div>
+
+          <ul class="mt-2 list-group">
+            <li :class="{active : item.important, done: item.done}"
+                class="list-group-item d-sm-flex align-items-center justify-content-sm-between" :key="item.id"
+                v-for="item in todoList">
+              <span class="list-group-text">{{ item.label }}</span>
+              <span class="d-block d-sm-inline-block">
+                <a href="#" @click.prevent="toggleProperty(item.id, 'important')"
+                   class="badge badge-info badge-pill">important</a>
+                <a href="#" @click.prevent="toggleProperty(item.id, 'done')" class="badge badge-success badge-pill">done</a>
+                <a href="#" @click.prevent="deleteItem(item.id)" class="badge badge-danger badge-pill">delete</a>
+              </span>
+            </li>
+          </ul>
+
+          <form @submit.prevent="addItem" class="mt-4">
+            <div class="row align-items-end">
+              <div class="col-sm-9 col-md-10 mb-2">
+                <div class="form-group mb-0">
+                  <label for="newItem">New Item</label>
+                  <input v-model="label" type="text" class="form-control" id="newItem" placeholder="New Item">
+                </div>
+              </div>
+              <div class="col-sm-3 col-md-2 mb-2 text-center text-sm-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/vue.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

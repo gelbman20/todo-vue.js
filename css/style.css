@@ -1,0 +1,42 @@
+.list-group-item {
+  transition: .3s ease-out all;
+}
+
+.list-group-item.done .list-group-text {
+  color: #00bc8c;
+}
+
+.list-group-text {
+  position: relative;
+  transition: .3s ease-out all;
+}
+
+.list-group-text:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+  width: 0;
+  border-bottom: 1px solid #00bc8c;
+  transition: .3s ease-out all;
+}
+
+.list-group-item.done .list-group-text:before {
+  width: 100%;
+}
+
+.alert {
+  z-index: 100;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-15px);
+  opacity: 0;
+  transition: .3s ease-out all;
+}
+.alert.active {
+  opacity: 1;
+  transform: translateY(0);
+}
